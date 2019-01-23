@@ -5,9 +5,9 @@ Prerequisite
 ------------
 
  - Gstreamer SDK for Android (>=1.7.1)
- - Android Studio (>=2.3.3)
+ - Android Studio (=3.3)
  - Android NDK (>=r15b)
- - Gradle (>=2.3.3)
+ - Gradle (=4.10.1)
 
 Build and Installation
 ----------------------
@@ -18,7 +18,12 @@ Build and Installation
   $ export GSTREAMER_ROOT_ANDROID=/path/to/gstreamer/sdk
 ```
 
- - Create `local.properties` and add `sdk.dir` and `ndk.dir` properties
+ - Create `local.properties` and add `sdk.dir` and `ndk.dir` properties:
+
+```
+  ndk.dir=/Users/justin/Library/Android/android-sdk-linux/android-ndk-r15c
+  sdk.dir=/Users/justin/Library/Android/android-sdk-linux
+```
 
  - Build with gradle
 
@@ -34,7 +39,7 @@ Build and Installation
 
 Screenshots
 ----------
-![screenshot](screenshots/screenshot.png)
+![screenshot](screenshots/screenshot_2019-01-23.png)
 
 Restrictions and Known bugs
 ---------------------------
