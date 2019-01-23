@@ -44,7 +44,7 @@ else
 $(error Target arch ABI not supported: $(TARGET_ARCH_ABI))
 endif
 
-GSTREAMER_NDK_BUILD_PATH  := $(GSTREAMER_ROOT)/share/gst-android/ndk-build/
+GSTREAMER_NDK_BUILD_PATH  := $(GSTREAMER_ROOT)/share/gst-android/ndk-build
 
 include $(GSTREAMER_NDK_BUILD_PATH)/plugins.mk
 GSTREAMER_PLUGINS	:=  $(GSTREAMER_PLUGINS_CORE) \
