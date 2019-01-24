@@ -1,9 +1,9 @@
 package org.freedesktop.gstreamer.camera;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
@@ -30,7 +30,6 @@ import org.freedesktop.gstreamer.examples.camera.R;
  */
 public class CameraActivity extends AppCompatActivity {
 
-    private static final int PERMISSION_REQUEST_CAMERA = 1;
 
     private GstAhc gstAhc;
     /**
@@ -108,14 +107,15 @@ public class CameraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(
-                    this,
-                    new String[] { Manifest.permission.CAMERA },
-                    PERMISSION_REQUEST_CAMERA);
-            return;
+        if (Build.VERSION.SDK_INT >= 23) {
+            String[] permissions = {
+            "android.permission.CAMERA",
+            "android.permission.RECORD_AUDIO"
+        };
+        int requestCode = 200;
+        ActivityCompat.requestPermissions(this, permissions, requestCode);
         }
+        
         try {
             gstAhc = GstAhc.init(this);
         } catch (Exception e) {
@@ -280,10 +280,10 @@ public class CameraActivity extends AppCompatActivity {
         GstAhc.Rotate rotate = GstAhc.Rotate.NONE;
 
         switch (rotation) {
-            case Surface.ROTATION_0: rotate = GstAhc.Rotate.COUNTERCLOCKWISE; break;
-            case Surface.ROTATION_90: rotate = GstAhc.Rotate.ROTATE_180; break;
-            case Surface.ROTATION_180: rotate = GstAhc.Rotate.NONE; break;
-            case Surface.ROTATION_270: rotate = GstAhc.Rotate.NONE; break;
+            case Surface.ROTATION_0: rotate = GstAhc.Rotate.CLOCKWISE; break;
+            case Surface.ROTATION_90: rotate = GstAhc.Rotate.NONE; break;
+            case Surface.ROTATION_180: rotate = GstAhc.Rotate.COUNTERCLOCKWISE; break;
+            case Surface.ROTATION_270: rotate = GstAhc.Rotate.ROTATE_180; break;
         }
 
         gstAhc.setRotateMethod(rotate);
